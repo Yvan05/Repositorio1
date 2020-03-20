@@ -34,6 +34,28 @@ int main()
 
 	return 0;
 }
+void ValidaCad(char cad[],char mens[])
+{
+	int i;
+	unsigned char letra;
+	
+	do{
+		letra=TRUE;
+		puts(mens);
+		fflush(stdin);
+		gets(cad);
+		strupr(cad);
+		for(i=0;i<strlen(cad);i++)
+		   {
+		   	if(cad[i]<65&&cad[i]>90||cad[0]==' ')
+		   	{
+		   		printf("Solo se aceptan letras. Intente denuevo.");
+		   		letra=FALSE;
+		   		system("pause");
+			}
+		   }
+	  }while(letra==FALSE);
+}
 
 //**********************************************************************************************************************************************
 
