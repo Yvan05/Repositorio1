@@ -1,3 +1,7 @@
+/*Miguel Diaz
+354292
+practica 10: Curp*/
+
 //**********************************************************************************************************************************************
 //**********************************************************************************************************************************************
 
@@ -31,9 +35,87 @@ void ValidaPamal(char[]);
 
 int main()
 {
-
+	srand(time(0));
+	setlocale(LC_ALL,"spanish");
+	Curp();
 	return 0;
 }
+
+//**********************************************************************************************************************************************
+//**********************************************************************************************************************************************
+
+void Curp()
+{
+	char curp[20],appat[15],apmat[15],nom1[15],nom2[15],sexo[3],dia[3],mes[3],anio[5];
+	int dMes[13]={0,31,28,31,30,31,30,31,31,30,31,30,31},anv,mesv,sv,rep;
+	
+	do{
+	ValidaCad(nom1,"Ingresa tu primer nombre: ");
+	ValidaCad(nom2,"Ingresa tu segundo nombre: ");
+	ValidaCad(appat,"Ingresa tu apellido paterno: ");
+	ValidaCad(apmat,"Ingresa tu apellido materno: ");
+	ValidaCadNum(anio,"Ingresa tu año de nacimiento en 4 digitos (AAAA): ",1900,2019,4);
+	ValidaCadNum(mes,"Ingresa tu mes de nacimiento en 2 digitos (mm): ",1,12,2);
+	anv=atoi(anio);
+	mesv=atoi(mes);
+	if(anv%4==0&&mesv==2)
+	{
+		dMes[2]=29;
+	}
+	ValidaCadNum(dia,"Ingresa tu dia de nacimiento en 2 digitos (dd): ",1,dMes[mesv],2);
+	curp[0]=appat[0];
+	curp[1]=BuscaVocal(appat);
+	curp[2]=apmat[0];
+	if(nom1=="MARIA"||nom1=="MA."||nom1=="MA"||nom1=="JOSE"||nom1=="J."||nom1=="J")
+	  {
+	  	curp[3]=nom2[0];
+	  }
+	 else
+	  {
+	  	curp[3]=nom1[0];
+	  }
+	curp[4]=anio[2];
+	curp[5]=anio[3];
+	curp[6]=mes[0];
+	curp[7]=mes[1];
+	curp[8]=dia[0];
+	curp[9]=dia[1];
+	ValidaCadNum(sexo,"Elije una opcion:\n1.-Hombre.\n2.-Mujer.\n",1,2,1);
+	sv=atoi(sexo);
+	if(sv==1)
+	  {
+	  	curp[10]='H';
+	  }
+	 else
+	  {
+	  	curp[10]='M';
+	  }
+	Estados(curp);
+	curp[13]=BuscaConsonante(appat);
+	curp[14]=BuscaConsonante(apmat);
+	curp[15]=BuscaConsonante(nom1);
+	if(anv>=1900&&anv<2000)
+	  {
+	  	curp[16]='0';
+	  }
+	 else
+	  {
+	  	curp[16]='1';
+	  }
+	curp[17]='1';
+	ValidaPamal(curp);
+	printf("\n\nTu CURP es: %s \n\n",curp);
+	printf("Desea volver a crear otro CURP? \n1.-Si\n2.-No\n");
+	scanf("%d",&rep);
+	ValidaNum(1,2,rep);
+	system("pause");
+	}while(rep!=2);
+}
+
+
+//**********************************************************************************************************************************************
+//**********************************************************************************************************************************************
+
 void ValidaCad(char cad[],char mens[])
 {
 	int i;
@@ -58,6 +140,8 @@ void ValidaCad(char cad[],char mens[])
 }
 
 //**********************************************************************************************************************************************
+//**********************************************************************************************************************************************
+
 void ValidaCadNum(char cad[],char mens[],int ri, int rf,int tam)
 {
 	
@@ -82,6 +166,7 @@ void ValidaCadNum(char cad[],char mens[],int ri, int rf,int tam)
 
 //**********************************************************************************************************************************************
 //**********************************************************************************************************************************************
+
 void Estados(char curp[])
 {
 	int opc,x;
@@ -311,6 +396,7 @@ char BuscaConsonante(char cad[])
 	int i;
 	
 	for(i=1;i<strlen(cad);i++)
+	for(i=1;i<strlen(cad);i++)
 	   {
 	   	if(cad[i]!='A'&&cad[i]!='E'&&cad[i]!='I'&&cad[i]!='O'&&cad[i]!='U')
 	   	  {
@@ -342,4 +428,4 @@ void ValidaPamal(char curp[])
 
 
 //**************************************************************************************************************************************
-
+//**************************************************************************************************************************************
